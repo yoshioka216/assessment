@@ -24,8 +24,24 @@ assessmentButton.addEventListener(
     paragraph.innerText = result;
     resultDivision.appendChild(paragraph);
 
-    // TODO ツイートエリアの作成
+    // ツイートエリアの作成
     tweetDivision.innerText = '';
+    const anchor = document.createElement('a');
+    const hrefValue =
+      'https://x.com/intent/tweet?button_hashtag=' +
+      encodeURIComponent('あなたのいいところ') +
+      '&ref_src=twsrc%5Etfw';
+
+    anchor.setAttribute('href', hrefValue);
+    anchor.setAttribute('class', 'twitter-hashtag-button');
+    anchor.setAttribute('data-text', result);
+    anchor.innerText = 'Tweet #あなたのいいところ';
+
+    tweetDivision.appendChild(anchor);
+
+    const script = document.createElement('script');
+    script.setAttribute('src', 'https://platform.twitter.com/widgets.js');
+    tweetDivision.appendChild(script);
   }
 );
 
@@ -104,19 +120,19 @@ function test() {
   console.assert(
     assessment('太郎') === assessment('太郎'),
     '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
-  );
+  )
 
   console.log('次郎');
   console.assert(
     assessment('次郎') === assessment('次郎'),
     '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
-  );
+  )
 
   console.log('花子');
   console.assert(
     assessment('花子') === assessment('花子'),
     '入力が同じ名前なら同じ診断結果を出力する処理が正しくありません。'
-  );
+  )
 
   console.log('同じ名前なら、同じ結果を出力することのテスト終了');
 }
